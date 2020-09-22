@@ -1,33 +1,33 @@
-let Vector = require('../vector');
-let assert = require('assert');
+import Vector from "../vector.js";
+import assert from 'assert';
 
 describe('Vectors', function () {
     const a = 1, b = 2, c = 3, d = 4;
     let vectorA = new Vector(a,b);
     let vectorB = new Vector(c,d);
     beforeEach(function(done) {
-        vectorA.pos.x = a;
-        vectorA.pos.y = b;
-        vectorB.pos.x = c;
-        vectorB.pos.y = d;
+        vectorA.x = a;
+        vectorA.y = b;
+        vectorB.x = c;
+        vectorB.y = d;
         done();
     });
     describe('Successful tests', function () {
         it('should add two vectors', function () {
             vectorA.add(vectorB);
-            assert.strictEqual(vectorA.pos.x, 4);
-            assert.strictEqual(vectorA.pos.y, 6);
+            assert.strictEqual(vectorA.x, 4);
+            assert.strictEqual(vectorA.y, 6);
         });
         it('should subtract two vectors', function () {
             vectorA.subtract(vectorB);
-            assert.strictEqual(vectorA.pos.x, -2);
-            assert.strictEqual(vectorA.pos.y, -2);
+            assert.strictEqual(vectorA.x, -2);
+            assert.strictEqual(vectorA.y, -2);
         });
 
         it('should return Vector.pos that\'s two times larger', function () {
             vectorA.scalar(5);
-            assert.strictEqual(vectorA.pos.x, 5);
-            assert.strictEqual(vectorA.pos.y, 10);
+            assert.strictEqual(vectorA.x, 5);
+            assert.strictEqual(vectorA.y, 10);
         });
         it('return vector length', function () {
             let length = vectorA.magnitude();
@@ -73,10 +73,8 @@ describe('Vectors', function () {
         });
         it('should fail to add with "own made object"', function () {
            let object = {
-               pos: {
                    x: 10,
                    y: 5
-               }
            }
            assert.throws(() => vectorA.add(object), TypeError);
         });
@@ -85,18 +83,18 @@ describe('Vectors', function () {
     describe('Static', function () {
         it('should subtract two vectors', function () {
             let newVector = Vector.subtract(vectorA, vectorB);
-            assert.strictEqual(newVector.pos.x, -2);
-            assert.strictEqual(newVector.pos.y, -2);
+            assert.strictEqual(newVector.x, -2);
+            assert.strictEqual(newVector.y, -2);
         });
         it('should add two vectors', function () {
             let newVector = Vector.add(vectorA, vectorB);
-            assert.strictEqual(newVector.pos.x, 4);
-            assert.strictEqual(newVector.pos.y, 6);
+            assert.strictEqual(newVector.x, 4);
+            assert.strictEqual(newVector.y, 6);
         });
         it('should return Vector.pos that\'s two times larger', function () {
             Vector.scalar(vectorA,5);
-            assert.strictEqual(vectorA.pos.x, 5);
-            assert.strictEqual(vectorA.pos.y, 10);
+            assert.strictEqual(vectorA.x, 5);
+            assert.strictEqual(vectorA.y, 10);
         });
         it('return vector length', function () {
             let length = Vector.magnitude(vectorA);
